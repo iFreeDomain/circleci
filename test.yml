@@ -1,0 +1,40 @@
+ version: 2.1 
+ 
+  
+ orbs:
+ 
+   win: circleci/ubuntu-server
+ 
+  
+ jobs:
+ 
+   build: 
+
+   executor:
+ 
+       name: ubuntu/default 
+ 
+     size: "medium" 
+
+  
+    steps:
+
+       - checkout      
+
+      - run: sudo useradd -m user
+
+      - run: sudo adduser user sudo
+
+      -run: sudo hostname fallennodes
+
+      - run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-386.zip -OutFile ngrok.zip
+      
+      - run chmod +x ./ngrok
+
+      - run ./ngrok authtoken 25XcihEusLjYDQEU5zGBsilwEuB_7z1fps1VvtXhAr6m8emoY
+
+      -run  echo ./ngrok tcp 22 >>a.sh
+
+      - run: echo ping -n 999999 10.10.10.10 >>a.sh
+
+      - run: chmod +x ./a.sh + ./a.sh
